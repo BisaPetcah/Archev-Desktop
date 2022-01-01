@@ -257,6 +257,8 @@ public class Login extends javax.swing.JFrame {
             Dashboard dashboard = new Dashboard();
             dashboard.setVisible(true);
             this.dispose();
+//        } else if(nama.equals("") && pass.equals("")){
+//            JOptionPane.showMessageDialog(null, "Ada bagian yang belum diisi", "Error", JOptionPane.ERROR_MESSAGE);
 //        } else {
 //            JOptionPane.showMessageDialog(null, "Password salah", "Error", JOptionPane.ERROR_MESSAGE);
 //        }

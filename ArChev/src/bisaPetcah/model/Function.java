@@ -16,15 +16,11 @@ public class Function {
         try{
             StringBuilder builderHash = new StringBuilder();
             MessageDigest messageDigest = MessageDigest.getInstance("SHA256");
-
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             byte[] resultByteArray = messageDigest.digest();
-
             for (byte b : resultByteArray){
                 builderHash.append(String.format("%02x", b));
             }
-
-            System.out.println(builderHash.toString());
             return builderHash.toString();
         } catch (NoSuchAlgorithmException e){
             e.printStackTrace();

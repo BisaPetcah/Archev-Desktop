@@ -5,7 +5,6 @@
 package bisaPetcah.model;
 
 import java.awt.Color;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -13,7 +12,6 @@ import javax.swing.JPanel;
  * @author bisaPetcah
  */
 public class Design {
-
     public static void setM(JPanel p){
         p.setBackground(new Color(249, 201, 115, 255));
     }
@@ -22,7 +20,7 @@ public class Design {
     }
 
     
-    public static void hoverBtn(JPanel p){
+    public static void btnHover(JPanel p){
         p.setBackground(new Color(249, 201, 115, 255));
     }
     
