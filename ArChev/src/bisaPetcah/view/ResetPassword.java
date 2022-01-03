@@ -3,6 +3,8 @@ package bisaPetcah.view;
 import bisaPetcah.model.Design;
 import bisaPetcah.model.admin.Admin;
 import bisaPetcah.model.admin.AdminService;
+import bisaPetcah.model.Function;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -232,7 +234,8 @@ public class ResetPassword extends javax.swing.JFrame {
         }
 
         Admin dataAdmin = admin.get(0);
-        boolean update = adminService.update(dataAdmin.getId(), new Admin(edtKataSandi.getText(), dataAdmin.getNama()));
+        String password = Function.security(edtKataSandi.getText());
+        boolean update = adminService.update(dataAdmin.getId(), new Admin(password, dataAdmin.getNama()));
 
         if (!update) {
             JOptionPane.showMessageDialog(null, "reset password gagal");

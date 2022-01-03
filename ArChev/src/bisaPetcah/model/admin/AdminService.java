@@ -5,6 +5,7 @@
 package bisaPetcah.model.admin;
 
 import bisaPetcah.database.ConnectionService;
+import bisaPetcah.model.Function;
 import bisaPetcah.model.Service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,7 +65,9 @@ public class AdminService extends Service<Admin> {
     @Override
     public boolean insert(Admin data) {
         String query = "INSERT INTO %s(username, password, nama) VALUES ('%s', '%s', '%s')";
-        query = String.format(query, this.table, data.getUsername(), data.getPassword(), data.getNama());
+        String password = data.getPassword();
+        password = Function.security(password);
+        query = String.format(query, this.table, data.getUsername(), password, data.getNama());
         try {
             int created = ConnectionService.query(query);
 
