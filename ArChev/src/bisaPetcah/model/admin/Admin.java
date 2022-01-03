@@ -21,6 +21,17 @@ public class Admin {
         this.password = password;
         this.nama = nama;
     }
+    
+    public Admin(String username, String password, String nama) {
+        this.username = username;
+        this.password = password;
+        this.nama = nama;
+    }
+    
+    public Admin(String password, String nama) {
+        this.password = password;
+        this.nama = nama;
+    }
 
     public int getId() {
         return id;

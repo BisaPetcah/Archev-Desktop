@@ -1,15 +1,21 @@
 package bisaPetcah.view;
 
 import bisaPetcah.model.Design;
+import bisaPetcah.model.admin.Admin;
+import bisaPetcah.model.admin.AdminService;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  * @author bisa_petcah
  */
 public class ResetPassword extends javax.swing.JFrame {
+
+    AdminService adminService = new AdminService();
 
     /**
      * Creates new form Login
@@ -19,7 +25,7 @@ public class ResetPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,9 +40,9 @@ public class ResetPassword extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        edtKataSandi = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        edtNamaPengguna = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnMasuk = new javax.swing.JLabel();
@@ -80,22 +86,17 @@ public class ResetPassword extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Selamat Datang di ArChev");
 
-        jTextPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(edtKataSandi);
 
-        jTextPane2.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(jTextPane2);
+        jScrollPane2.setViewportView(edtNamaPengguna);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nama Pengguna");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Kata Sandi Baru");
 
         btnMasuk.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnMasuk.setForeground(new java.awt.Color(0, 0, 0));
         btnMasuk.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnMasuk.setText("Masuk");
         btnMasuk.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,6 +107,9 @@ public class ResetPassword extends javax.swing.JFrame {
 
         btnReset.setBackground(new java.awt.Color(255, 153, 0));
         btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnResetMouseEntered(evt);
             }
@@ -137,7 +141,6 @@ public class ResetPassword extends javax.swing.JFrame {
         );
 
         jLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel.setForeground(new java.awt.Color(0, 0, 0));
         jLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel.setText("Ingin masuk ?");
         jLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,7 +155,7 @@ public class ResetPassword extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,6 +218,32 @@ public class ResetPassword extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelMouseClicked
 
+    private void btnResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetMouseClicked
+        // TODO add your handling code here:
+        if (edtNamaPengguna.getText().isBlank() || edtKataSandi.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Data masih ada yg kosong");
+            return;
+        }
+
+        ArrayList<Admin> admin = adminService.where("username = '" + edtNamaPengguna.getText() + "'");
+        if (admin.size() != 1) {
+            JOptionPane.showMessageDialog(null, "username tidak ada");
+            return;
+        }
+
+        Admin dataAdmin = admin.get(0);
+        boolean update = adminService.update(dataAdmin.getId(), new Admin(edtKataSandi.getText(), dataAdmin.getNama()));
+
+        if (!update) {
+            JOptionPane.showMessageDialog(null, "reset password gagal");
+            return;
+        }
+
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnResetMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -252,6 +281,8 @@ public class ResetPassword extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnMasuk;
     private javax.swing.JPanel btnReset;
+    private javax.swing.JTextPane edtKataSandi;
+    private javax.swing.JTextPane edtNamaPengguna;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -261,8 +292,6 @@ public class ResetPassword extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
     private javax.swing.JPanel sideImage;
     // End of variables declaration//GEN-END:variables
 }

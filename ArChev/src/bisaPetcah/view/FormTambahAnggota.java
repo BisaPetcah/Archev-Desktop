@@ -1,15 +1,24 @@
 package bisaPetcah.view;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
+import bisaPetcah.model.divisi.DivisiService;
+import bisaPetcah.model.member.Member;
+import bisaPetcah.model.member.MemberService;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * @author bisa_petcah
  */
 public class FormTambahAnggota extends javax.swing.JFrame {
+
+    MemberService memberService = new MemberService();
+    DivisiService divisiService = new DivisiService();
 
     /**
      * Creates new form Dashboard
@@ -18,6 +27,29 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        initUsername();
+    }
+    
+    public void initUsername() {
+        tvUsername.setText(Auth.getNama());
+    }
+
+    public void reset() {
+        edtEmail.setText("");
+        edtNama.setText("");
+        edtTahunAngkatan.setText("");
+        cbDivisi.setSelectedIndex(0);
+        cbStatus.setSelectedIndex(0);
+    }
+
+    public int convertDivisi(String nama) {
+        ArrayList<bisaPetcah.model.divisi.Divisi> dataDivisi = divisiService.all();
+        for (bisaPetcah.model.divisi.Divisi data : dataDivisi) {
+            if (data.getNama().equals(nama)) {
+                return data.getId();
+            }
+        }
+        return 0;
     }
 
     /**
@@ -72,10 +104,8 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         Dashboard.setBackground(new java.awt.Color(229, 229, 229));
 
         tvUsername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tvUsername.setForeground(new java.awt.Color(0, 0, 0));
         tvUsername.setText("Username");
 
-        tvRole.setForeground(new java.awt.Color(0, 0, 0));
         tvRole.setText("Admin");
 
         panelSideBarMenu.setBackground(new java.awt.Color(153, 153, 153));
@@ -83,10 +113,20 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         panelInput.setBackground(new java.awt.Color(255, 255, 255));
 
         btnDashboard.setBackground(new java.awt.Color(255, 255, 255));
+        btnDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDashboardMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDashboardMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDashboardMouseExited(evt);
+            }
+        });
 
         txtDashboard.setBackground(new java.awt.Color(255, 255, 255));
         txtDashboard.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtDashboard.setForeground(new java.awt.Color(0, 0, 0));
         txtDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-dashboard.png"))); // NOI18N
         txtDashboard.setText("Dashboard");
 
@@ -122,7 +162,6 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
         txtTotalAnggota.setBackground(new java.awt.Color(255, 255, 255));
         txtTotalAnggota.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTotalAnggota.setForeground(new java.awt.Color(0, 0, 0));
         txtTotalAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtTotalAnggota.setText("Total Anggota");
 
@@ -143,10 +182,20 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         );
 
         btnAnggotaAktif.setBackground(new java.awt.Color(255, 255, 255));
+        btnAnggotaAktif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnggotaAktifMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAnggotaAktifMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAnggotaAktifMouseExited(evt);
+            }
+        });
 
         txtAnggotaAktif.setBackground(new java.awt.Color(255, 255, 255));
         txtAnggotaAktif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtAnggotaAktif.setForeground(new java.awt.Color(0, 0, 0));
         txtAnggotaAktif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtAnggotaAktif.setText("Anggota Aktif");
 
@@ -181,7 +230,6 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
         txtAnggotaPasif.setBackground(new java.awt.Color(255, 255, 255));
         txtAnggotaPasif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtAnggotaPasif.setForeground(new java.awt.Color(0, 0, 0));
         txtAnggotaPasif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtAnggotaPasif.setText("Anggota Pasif");
 
@@ -198,7 +246,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
             .addGroup(btnAnggotaPasifLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtAnggotaPasif, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnDivisi.setBackground(new java.awt.Color(255, 255, 255));
@@ -216,7 +264,6 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
         txtDivisi.setBackground(new java.awt.Color(255, 255, 255));
         txtDivisi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtDivisi.setForeground(new java.awt.Color(0, 0, 0));
         txtDivisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-divisi.png"))); // NOI18N
         txtDivisi.setText("Divisi");
 
@@ -283,7 +330,6 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
         txtLogout.setBackground(new java.awt.Color(255, 255, 255));
         txtLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogout.setForeground(new java.awt.Color(0, 0, 0));
         txtLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-logout.png"))); // NOI18N
         txtLogout.setText("Logout");
 
@@ -330,7 +376,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(logoArchev, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,45 +414,40 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBatal.setForeground(new java.awt.Color(255, 255, 255));
         btnBatal.setText("Batal");
-
-        edtEmail.setBackground(new java.awt.Color(255, 255, 255));
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalActionPerformed(evt);
+            }
+        });
 
         tvName1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tvName1.setForeground(new java.awt.Color(0, 0, 0));
         tvName1.setText("Alamat Email");
 
-        cbStatus.setBackground(new java.awt.Color(255, 255, 255));
-        cbStatus.setForeground(new java.awt.Color(0, 0, 0));
         cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aktif", "Pasif" }));
 
-        edtNama.setBackground(new java.awt.Color(255, 255, 255));
-
-        cbDivisi.setBackground(new java.awt.Color(255, 255, 255));
-        cbDivisi.setForeground(new java.awt.Color(0, 0, 0));
         cbDivisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Web", "Android", "Game", "UI/UX", "Startup Competion"}));
 
         tvName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tvName.setForeground(new java.awt.Color(0, 0, 0));
         tvName.setText("Nama Lengkap");
 
         tvName4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tvName4.setForeground(new java.awt.Color(0, 0, 0));
         tvName4.setText("Status");
 
         tvName3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tvName3.setForeground(new java.awt.Color(0, 0, 0));
         tvName3.setText("Divisi");
 
-        edtTahunAngkatan.setBackground(new java.awt.Color(255, 255, 255));
-
         tvName2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tvName2.setForeground(new java.awt.Color(0, 0, 0));
         tvName2.setText("Tahun Angkatan");
 
         btnTambah.setBackground(new java.awt.Color(44, 157, 205));
         btnTambah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTambah.setForeground(new java.awt.Color(255, 255, 255));
         btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
         Dashboard.setLayout(DashboardLayout);
@@ -500,6 +541,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
+        Auth.logout();
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
@@ -539,10 +581,16 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
     private void btnTotalAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTotalAnggotaMouseClicked
         // TODO add your handling code here:
+        TotalAnggota view = new TotalAnggota();
+        view.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_btnTotalAnggotaMouseClicked
 
     private void btnAnggotaPasifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaPasifMouseClicked
         // TODO add your handling code here:
+        AnggotaPasif view = new AnggotaPasif();
+        view.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAnggotaPasifMouseClicked
 
     private void btnDivisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiMouseClicked
@@ -550,6 +598,72 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         divisi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDivisiMouseClicked
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        // TODO add your handling code here:
+        if (edtNama.getText().isBlank() || edtEmail.getText().isBlank() || edtTahunAngkatan.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Data masih ada yg kosong");
+            return;
+        }
+
+        ArrayList<Member> admin = memberService.where("email = '" + edtEmail.getText() + "'");
+        if (admin.size() != 0) {
+            JOptionPane.showMessageDialog(null, "email sudah ada");
+            return;
+        }
+
+        int divisi_id = convertDivisi(String.valueOf(cbDivisi.getSelectedItem()));
+        Member data = new Member(edtNama.getText(), edtTahunAngkatan.getText(), edtEmail.getText(), String.valueOf(cbStatus.getSelectedItem()), divisi_id);
+        boolean created = memberService.insert(data);
+
+        if (!created) {
+            JOptionPane.showMessageDialog(null, "tambah anggota gagal");
+            return;
+        } else {
+            JOptionPane.showMessageDialog(null, "tambah anggota berhasil");
+        }
+
+        reset();
+    }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnAnggotaAktifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseClicked
+        // TODO add your handling code here:
+        AnggotaAktif anggotaAktif = new AnggotaAktif();
+        anggotaAktif.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAnggotaAktifMouseClicked
+
+    private void btnAnggotaAktifMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseEntered
+        // TODO add your handling code here:
+        Design.btnHover(btnAnggotaAktif);
+    }//GEN-LAST:event_btnAnggotaAktifMouseEntered
+
+    private void btnAnggotaAktifMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseExited
+        // TODO add your handling code here:
+        Design.btnInActive(btnAnggotaAktif);
+    }//GEN-LAST:event_btnAnggotaAktifMouseExited
+
+    private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
+        // TODO add your handling code here:
+        Dashboard dashboard = new Dashboard();
+        dashboard.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnDashboardMouseClicked
+
+    private void btnDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseEntered
+        // TODO add your handling code here:
+        Design.btnHover(btnDashboard);
+    }//GEN-LAST:event_btnDashboardMouseEntered
+
+    private void btnDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseExited
+        // TODO add your handling code here:
+        Design.btnInActive(btnDashboard);
+    }//GEN-LAST:event_btnDashboardMouseExited
 
     /**
      * @param args the command line arguments

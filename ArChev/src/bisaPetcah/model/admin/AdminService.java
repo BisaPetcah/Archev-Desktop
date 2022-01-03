@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author ma39i
  */
-public class AdminService extends Service {
+public class AdminService extends Service<Admin> {
 
     public AdminService() {
         this.table = "admin";
@@ -58,6 +58,60 @@ public class AdminService extends Service {
 
     @Override
     public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
+    public boolean insert(Admin data) {
+        String query = "INSERT INTO %s(username, password, nama) VALUES ('%s', '%s', '%s')";
+        query = String.format(query, this.table, data.getUsername(), data.getPassword(), data.getNama());
+        try {
+            int created = ConnectionService.query(query);
+
+            if (created > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            ConnectionService.close();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean update(int id, Admin data) {
+        try {
+            String query = "UPDATE %s SET password = '%s', nama = '%s' WHERE id = %d";
+            query = String.format(query, this.table, data.getPassword(), data.getNama(), id);
+            int updated = ConnectionService.query(query);
+
+            if (updated > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            ConnectionService.close();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateWhere(String where, Admin data) {
+        try {
+            String query = "UPDATE %s SET password = '%s', nama = '%s' WHERE %s";
+            query = String.format(query, this.table, data.getPassword(), data.getNama(), where);
+            int updated = ConnectionService.query(query);
+
+            if (updated > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            ConnectionService.close();
+        }
         return false;
     }
 }

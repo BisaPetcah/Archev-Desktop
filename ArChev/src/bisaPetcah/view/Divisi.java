@@ -4,6 +4,7 @@ package bisaPetcah.view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
 
 /**
@@ -18,6 +19,11 @@ public class Divisi extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        initUsername();
+    }
+    
+    public void initUsername() {
+        tvUsername.setText(Auth.getNama());
     }
 
     /**
@@ -613,6 +619,7 @@ public class Divisi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
+        Auth.logout();
         Login login = new Login();
         login.setVisible(true);
         this.dispose();

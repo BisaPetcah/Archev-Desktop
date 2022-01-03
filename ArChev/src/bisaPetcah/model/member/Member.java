@@ -26,6 +26,14 @@ public class Member {
         this.divisi_id = divisi_id;
     }
     
+    public Member(String nama, String tahun_angkatan, String email, String status, int divisi_id) {
+        this.nama = nama;
+        this.tahun_angkatan = tahun_angkatan;
+        this.email = email;
+        this.status = status;
+        this.divisi_id = divisi_id;
+    }
+    
     public Member(int id, String nama, String tahun_angkatan, String email, String status, String divisi) {
         this.id = id;
         this.nama = nama;

@@ -5,6 +5,7 @@ package bisaPetcah.view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
 import bisaPetcah.model.member.Member;
 import bisaPetcah.model.member.MemberService;
@@ -27,7 +28,12 @@ public class TotalAnggota extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        initUsername();
         initTable();
+    }
+    
+    public void initUsername() {
+        tvUsername.setText(Auth.getNama());
     }
 
     public void initTable() {
@@ -499,6 +505,7 @@ public class TotalAnggota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
+        Auth.logout();
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
@@ -580,7 +587,7 @@ public class TotalAnggota extends javax.swing.JFrame {
         if (edtCari.getText().isBlank()) {
             tampilAll();
         } else {
-            ArrayList<Member> dataPelanggan = memberService.where("nama LIKE '%" + edtCari.getText() + "%'");
+            ArrayList<Member> dataPelanggan = memberService.where("m.nama LIKE '%" + edtCari.getText() + "%'");
             boolean exist = tampilWithData(dataPelanggan);
             if (!exist) {
                 JOptionPane.showMessageDialog(this, "Data tidak ada");

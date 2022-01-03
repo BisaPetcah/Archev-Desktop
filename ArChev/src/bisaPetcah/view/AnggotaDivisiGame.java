@@ -5,6 +5,7 @@ package bisaPetcah.view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
 import bisaPetcah.model.member.Member;
 import bisaPetcah.model.member.MemberService;
@@ -27,7 +28,12 @@ public class AnggotaDivisiGame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        initUsername();
         initTable();
+    }
+    
+    public void initUsername() {
+        tvUsername.setText(Auth.getNama());
     }
 
     public void initTable() {
@@ -447,6 +453,11 @@ public class AnggotaDivisiGame extends javax.swing.JFrame {
         btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnHapus.setBackground(new java.awt.Color(255, 164, 0));
         btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -517,6 +528,7 @@ public class AnggotaDivisiGame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
+        Auth.logout();
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
@@ -632,6 +644,17 @@ public class AnggotaDivisiGame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int i = table.getSelectedRow();
+
+        if (i >= 0) {
+            UbahAnggota ubahAnggota = new UbahAnggota(String.valueOf(tableModel.getValueAt(i, 2)));
+            ubahAnggota.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments

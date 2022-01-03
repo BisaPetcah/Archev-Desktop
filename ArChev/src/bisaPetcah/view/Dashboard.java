@@ -19,6 +19,11 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        initUsername();
+    }
+    
+    public void initUsername() {
+        tvUsername.setText(Auth.getNama());
     }
 
     /**
@@ -649,7 +654,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutMouseEntered
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
-        boolean auth = Auth.logout();
+        Auth.logout();
         Login login = new Login();
         login.setVisible(true);
         this.dispose();

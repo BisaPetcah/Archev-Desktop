@@ -1,15 +1,22 @@
 package bisaPetcah.view;
 
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
+import bisaPetcah.model.admin.Admin;
+import bisaPetcah.model.admin.AdminService;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  * @author bisa_petcah
  */
 public class Register extends javax.swing.JFrame {
+
+    AdminService adminService = new AdminService();
 
     /**
      * Creates new form Login
@@ -19,7 +26,7 @@ public class Register extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +43,7 @@ public class Register extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         edtNamaPengguna = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        edtEmail = new javax.swing.JTextPane();
+        edtNama = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -83,27 +90,25 @@ public class Register extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Selamat Datang di ArChev");
 
-        edtNamaPengguna.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(edtNamaPengguna);
 
-        edtEmail.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(edtEmail);
+        jScrollPane2.setViewportView(edtNama);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Email");
+        jLabel3.setText("Nama Lengkap");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nama Pengguna");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Sudah mempunyai akun ?");
 
         btnDaftar.setBackground(new java.awt.Color(255, 153, 0));
         btnDaftar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDaftarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnDaftarMouseEntered(evt);
             }
@@ -135,7 +140,6 @@ public class Register extends javax.swing.JFrame {
         );
 
         btnMasuk.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnMasuk.setForeground(new java.awt.Color(0, 0, 0));
         btnMasuk.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnMasuk.setText("Masuk");
         btnMasuk.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,11 +148,9 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        edtKataSandi.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(edtKataSandi);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Kata Sandi");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -165,7 +167,7 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
@@ -221,6 +223,35 @@ public class Register extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMasukMouseClicked
 
+    private void btnDaftarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDaftarMouseClicked
+        // TODO add your handling code here:
+        if (edtNama.getText().isBlank() || edtNamaPengguna.getText().isBlank() || edtKataSandi.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Data masih ada yg kosong");
+            return;
+        }
+
+        ArrayList<Admin> admin = adminService.where("username = '" + edtNamaPengguna.getText() + "'");
+        if (admin.size() != 0) {
+            JOptionPane.showMessageDialog(null, "username sudah ada");
+            return;
+        }
+
+        Admin data = new Admin(edtNamaPengguna.getText(), edtKataSandi.getText(), edtNama.getText());
+        boolean created = adminService.insert(data);
+
+        if (!created) {
+            JOptionPane.showMessageDialog(null, "daftar gagal");
+            return;
+        }
+
+        Auth.login(data.getUsername(), data.getPassword());
+        if (Auth.isAuth()) {
+            Dashboard dashboard = new Dashboard();
+            dashboard.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnDaftarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -258,8 +289,8 @@ public class Register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnDaftar;
     private javax.swing.JLabel btnMasuk;
-    private javax.swing.JTextPane edtEmail;
     private javax.swing.JTextPane edtKataSandi;
+    private javax.swing.JTextPane edtNama;
     private javax.swing.JTextPane edtNamaPengguna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
