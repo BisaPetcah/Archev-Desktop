@@ -1,9 +1,10 @@
 package bisaPetcah.view;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
 import bisaPetcah.model.Function;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,23 +85,18 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Selamat Datang di ArChev");
 
-        edtNamPengguna.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(edtNamPengguna);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nama Pengguna");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Kata Sandi");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Belum mempunyai akun ?");
 
         btnLupaKataSandi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnLupaKataSandi.setForeground(new java.awt.Color(0, 0, 0));
         btnLupaKataSandi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnLupaKataSandi.setText("Lupa kata sandi ?");
         btnLupaKataSandi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,7 +141,6 @@ public class Login extends javax.swing.JFrame {
         );
 
         btnDaftar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnDaftar.setForeground(new java.awt.Color(0, 0, 0));
         btnDaftar.setText("Daftar");
         btnDaftar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,15 +149,12 @@ public class Login extends javax.swing.JFrame {
         });
 
         cPassword.setBackground(new java.awt.Color(255, 255, 255));
-        cPassword.setForeground(new java.awt.Color(0, 0, 0));
         cPassword.setText("Sembunyikan");
         cPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cPasswordActionPerformed(evt);
             }
         });
-
-        edtPassword.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -176,7 +168,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -241,22 +233,32 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDaftarMouseClicked
 
     private void cPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cPasswordActionPerformed
-        if(cPassword.isSelected()){
-            edtPassword.setEchoChar((char)0);
+        if (cPassword.isSelected()) {
+            edtPassword.setEchoChar((char) 0);
         } else {
             edtPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_cPasswordActionPerformed
 
     private void btnMasukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasukMouseClicked
-//        String nama = edtNamPengguna.getText();
-//        String pass = new String(edtPassword.getPassword());  
+        String nama = edtNamPengguna.getText();
+        String pass = new String(edtPassword.getPassword());
 //        pass = Function.security(pass);
 //        
+        if (nama.equals("") && pass.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ada bagian yang belum diisi", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        boolean auth = Auth.login(nama, pass);
+        if (!auth) {
+            JOptionPane.showMessageDialog(null, "Nama Pengguna atau Password salah", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 //        if (nama.equalsIgnoreCase("admin") && pass.equalsIgnoreCase("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918")){
-            Dashboard dashboard = new Dashboard();
-            dashboard.setVisible(true);
-            this.dispose();
+        Dashboard dashboard = new Dashboard();
+        dashboard.setVisible(true);
+        this.dispose();
 //        } else if(nama.equals("") && pass.equals("")){
 //            JOptionPane.showMessageDialog(null, "Ada bagian yang belum diisi", "Error", JOptionPane.ERROR_MESSAGE);
 //        } else {

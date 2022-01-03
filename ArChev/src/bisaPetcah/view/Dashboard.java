@@ -4,6 +4,7 @@ package bisaPetcah.view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
 
 /**
@@ -76,10 +77,8 @@ public class Dashboard extends javax.swing.JFrame {
         Dashboard.setBackground(new java.awt.Color(229, 229, 229));
 
         tvUsername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tvUsername.setForeground(new java.awt.Color(0, 0, 0));
         tvUsername.setText("Username");
 
-        tvRole.setForeground(new java.awt.Color(0, 0, 0));
         tvRole.setText("Admin");
 
         panelSideBarMenu.setBackground(new java.awt.Color(153, 153, 153));
@@ -90,7 +89,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtDashboard.setBackground(new java.awt.Color(255, 255, 255));
         txtDashboard.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtDashboard.setForeground(new java.awt.Color(0, 0, 0));
         txtDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-dashboard.png"))); // NOI18N
         txtDashboard.setText("Dashboard");
 
@@ -126,7 +124,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtTotalAnggota.setBackground(new java.awt.Color(255, 255, 255));
         txtTotalAnggota.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTotalAnggota.setForeground(new java.awt.Color(0, 0, 0));
         txtTotalAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtTotalAnggota.setText("Total Anggota");
 
@@ -161,7 +158,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtAnggotaAktif.setBackground(new java.awt.Color(255, 255, 255));
         txtAnggotaAktif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtAnggotaAktif.setForeground(new java.awt.Color(0, 0, 0));
         txtAnggotaAktif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtAnggotaAktif.setText("Anggota Aktif");
 
@@ -196,7 +192,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtAnggotaPasif.setBackground(new java.awt.Color(255, 255, 255));
         txtAnggotaPasif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtAnggotaPasif.setForeground(new java.awt.Color(0, 0, 0));
         txtAnggotaPasif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtAnggotaPasif.setText("Anggota Pasif");
 
@@ -213,7 +208,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(btnAnggotaPasifLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtAnggotaPasif, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnDivisi.setBackground(new java.awt.Color(255, 255, 255));
@@ -231,7 +226,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtDivisi.setBackground(new java.awt.Color(255, 255, 255));
         txtDivisi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtDivisi.setForeground(new java.awt.Color(0, 0, 0));
         txtDivisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-divisi.png"))); // NOI18N
         txtDivisi.setText("Divisi");
 
@@ -278,7 +272,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(btnAnggotaPasif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDivisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelLog.setBackground(new java.awt.Color(255, 255, 255));
@@ -298,7 +292,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtLogout.setBackground(new java.awt.Color(255, 255, 255));
         txtLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogout.setForeground(new java.awt.Color(0, 0, 0));
         txtLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-logout.png"))); // NOI18N
         txtLogout.setText("Logout");
 
@@ -345,7 +338,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(logoArchev, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,13 +442,11 @@ public class Dashboard extends javax.swing.JFrame {
 
         countJumlahAnggotaAktif.setBackground(new java.awt.Color(255, 255, 255));
         countJumlahAnggotaAktif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        countJumlahAnggotaAktif.setForeground(new java.awt.Color(0, 0, 0));
         countJumlahAnggotaAktif.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         countJumlahAnggotaAktif.setText("Jumlah");
 
         Label1.setBackground(new java.awt.Color(255, 255, 255));
         Label1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Label1.setForeground(new java.awt.Color(0, 0, 0));
         Label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label1.setText("Anggota Aktif");
 
@@ -503,13 +494,11 @@ public class Dashboard extends javax.swing.JFrame {
 
         countJumlahAnggotaPasif.setBackground(new java.awt.Color(255, 255, 255));
         countJumlahAnggotaPasif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        countJumlahAnggotaPasif.setForeground(new java.awt.Color(0, 0, 0));
         countJumlahAnggotaPasif.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         countJumlahAnggotaPasif.setText("Jumlah");
 
         Label2.setBackground(new java.awt.Color(255, 255, 255));
         Label2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Label2.setForeground(new java.awt.Color(0, 0, 0));
         Label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label2.setText("Anggota Pasif");
 
@@ -557,13 +546,11 @@ public class Dashboard extends javax.swing.JFrame {
 
         countJumlahDivisi.setBackground(new java.awt.Color(255, 255, 255));
         countJumlahDivisi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        countJumlahDivisi.setForeground(new java.awt.Color(0, 0, 0));
         countJumlahDivisi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         countJumlahDivisi.setText("Jumlah");
 
         Label3.setBackground(new java.awt.Color(255, 255, 255));
         Label3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Label3.setForeground(new java.awt.Color(0, 0, 0));
         Label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label3.setText("Divisi");
 
@@ -662,6 +649,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutMouseEntered
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
+        boolean auth = Auth.logout();
         Login login = new Login();
         login.setVisible(true);
         this.dispose();

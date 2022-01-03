@@ -1,15 +1,24 @@
 package bisaPetcah.view;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
 import bisaPetcah.model.Design;
+import bisaPetcah.model.member.Member;
+import bisaPetcah.model.member.MemberService;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author bisa_petcah
  */
 public class TotalAnggota extends javax.swing.JFrame {
+
+    DefaultTableModel tableModel;
+    MemberService memberService = new MemberService();
 
     /**
      * Creates new form Dashboard
@@ -18,6 +27,45 @@ public class TotalAnggota extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        initTable();
+    }
+
+    public void initTable() {
+        String[] header = {
+            "Nomor", "Nama", "Email", "Divisi", "Angkatan", "Status", "id"
+        };
+
+        tableModel = new DefaultTableModel(header, 0);
+        table.setModel(tableModel);
+        tampilAll();
+    }
+
+    public void tampilAll() {
+        int i = 1;
+        ArrayList<Member> dataAnggota = memberService.all();
+        for (Member data : dataAnggota) {
+            addDataToTable(i++, data);
+        }
+    }
+
+    public boolean tampilWithData(ArrayList<Member> dataAnggota) {
+        int i = 1;
+        for (Member data : dataAnggota) {
+            addDataToTable(i++, data);
+        }
+        return dataAnggota.size() > 0;
+    }
+
+    public void updateTable() {
+        tableModel.setNumRows(0);
+        tampilAll();
+    }
+
+    public void addDataToTable(int counter, Member member) {
+        String[] data = {
+            String.valueOf(counter), member.getNama(), member.getEmail(), member.getNama_divisi(), member.getTahun_angkatan(), member.getStatus()
+        };
+        tableModel.addRow(data);
     }
 
     /**
@@ -65,10 +113,8 @@ public class TotalAnggota extends javax.swing.JFrame {
         Dashboard.setBackground(new java.awt.Color(229, 229, 229));
 
         tvUsername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tvUsername.setForeground(new java.awt.Color(0, 0, 0));
         tvUsername.setText("Username");
 
-        tvRole.setForeground(new java.awt.Color(0, 0, 0));
         tvRole.setText("Admin");
 
         panelSideBarMenu.setBackground(new java.awt.Color(153, 153, 153));
@@ -90,7 +136,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         txtDashboard.setBackground(new java.awt.Color(255, 255, 255));
         txtDashboard.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtDashboard.setForeground(new java.awt.Color(0, 0, 0));
         txtDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-dashboard.png"))); // NOI18N
         txtDashboard.setText("Dashboard");
 
@@ -115,7 +160,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         txtTotalAnggota.setBackground(new java.awt.Color(255, 255, 255));
         txtTotalAnggota.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTotalAnggota.setForeground(new java.awt.Color(0, 0, 0));
         txtTotalAnggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtTotalAnggota.setText("Total Anggota");
 
@@ -150,7 +194,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         txtAnggotaAktif.setBackground(new java.awt.Color(255, 255, 255));
         txtAnggotaAktif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtAnggotaAktif.setForeground(new java.awt.Color(0, 0, 0));
         txtAnggotaAktif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtAnggotaAktif.setText("Anggota Aktif");
 
@@ -185,7 +228,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         txtAnggotaPasif.setBackground(new java.awt.Color(255, 255, 255));
         txtAnggotaPasif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtAnggotaPasif.setForeground(new java.awt.Color(0, 0, 0));
         txtAnggotaPasif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-people.png"))); // NOI18N
         txtAnggotaPasif.setText("Anggota Pasif");
 
@@ -202,7 +244,7 @@ public class TotalAnggota extends javax.swing.JFrame {
             .addGroup(btnAnggotaPasifLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtAnggotaPasif, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnDivisi.setBackground(new java.awt.Color(255, 255, 255));
@@ -220,7 +262,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         txtDivisi.setBackground(new java.awt.Color(255, 255, 255));
         txtDivisi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtDivisi.setForeground(new java.awt.Color(0, 0, 0));
         txtDivisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-divisi.png"))); // NOI18N
         txtDivisi.setText("Divisi");
 
@@ -267,7 +308,7 @@ public class TotalAnggota extends javax.swing.JFrame {
                 .addComponent(btnAnggotaPasif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDivisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelLog.setBackground(new java.awt.Color(255, 255, 255));
@@ -287,7 +328,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         txtLogout.setBackground(new java.awt.Color(255, 255, 255));
         txtLogout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtLogout.setForeground(new java.awt.Color(0, 0, 0));
         txtLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/icon/icon-logout.png"))); // NOI18N
         txtLogout.setText("Logout");
 
@@ -334,7 +374,7 @@ public class TotalAnggota extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(logoArchev, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +410,6 @@ public class TotalAnggota extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        table.setBackground(new java.awt.Color(255, 255, 255));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -392,12 +431,15 @@ public class TotalAnggota extends javax.swing.JFrame {
             }
         });
 
-        edtCari.setBackground(new java.awt.Color(255, 255, 255));
-
         btnCari.setBackground(new java.awt.Color(255, 164, 0));
         btnCari.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCari.setForeground(new java.awt.Color(255, 255, 255));
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
         Dashboard.setLayout(DashboardLayout);
@@ -531,6 +573,20 @@ public class TotalAnggota extends javax.swing.JFrame {
         view.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTambahAnggotaActionPerformed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        // TODO add your handling code here:
+        tableModel.setNumRows(0);
+        if (edtCari.getText().isBlank()) {
+            tampilAll();
+        } else {
+            ArrayList<Member> dataPelanggan = memberService.where("nama LIKE '%" + edtCari.getText() + "%'");
+            boolean exist = tampilWithData(dataPelanggan);
+            if (!exist) {
+                JOptionPane.showMessageDialog(this, "Data tidak ada");
+            }
+        }
+    }//GEN-LAST:event_btnCariActionPerformed
 
     /**
      * @param args the command line arguments
