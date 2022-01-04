@@ -10,13 +10,15 @@ import bisaPetcah.model.divisi.DivisiService;
 import bisaPetcah.model.member.Member;
 import bisaPetcah.model.member.MemberService;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
  * @author bisa_petcah
  */
 public class UbahAnggota extends javax.swing.JFrame {
-    
+
+    DefaultComboBoxModel<String> comboModel;
     private String email;
     MemberService memberService = new MemberService();
     DivisiService divisiService = new DivisiService();
@@ -30,27 +32,39 @@ public class UbahAnggota extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         initUsername();
+        initDivisi();
         initUbahData();
     }
 
     private UbahAnggota() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public void initUsername() {
         tvUsername.setText(Auth.getNama());
     }
-    
+
+    public void initDivisi() {
+        comboModel = new DefaultComboBoxModel<>();
+        ArrayList<bisaPetcah.model.divisi.Divisi> dataDivisi = divisiService.all();
+
+        for (bisaPetcah.model.divisi.Divisi data : dataDivisi) {
+            comboModel.addElement(String.valueOf(data.getNama()));
+        }
+
+        cbDivisi.setModel(comboModel);
+    }
+
     public void initUbahData() {
         Member data = memberService.where("email = '" + this.email + "'").get(0);
-        
+
         edtEmail.setText(data.getEmail());
         edtNama.setText(data.getNama());
         edtTahunAngkatan.setText(data.getTahun_angkatan());
         cbDivisi.setSelectedItem(data.getNama_divisi());
         cbStatus.setSelectedItem(data.getStatus());
     }
-    
+
     public int convertDivisi(String nama) {
         ArrayList<bisaPetcah.model.divisi.Divisi> dataDivisi = divisiService.all();
         for (bisaPetcah.model.divisi.Divisi data : dataDivisi) {
@@ -614,16 +628,16 @@ public class UbahAnggota extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Data masih ada yg kosong");
             return;
         }
-        
+
         ArrayList<Member> admin = memberService.where("email = '" + edtEmail.getText() + "'");
         if (admin.size() > 0 && this.email == edtEmail.getText()) {
             JOptionPane.showMessageDialog(null, "email sudah ada");
             return;
         }
-        
+
         int divisi_id = convertDivisi(String.valueOf(cbDivisi.getSelectedItem()));
         Member data = new Member(edtNama.getText(), edtTahunAngkatan.getText(), edtEmail.getText(), String.valueOf(cbStatus.getSelectedItem()), divisi_id);
-        boolean updated = memberService.updateWhere("email = '"+ this.email +"'", data);
+        boolean updated = memberService.updateWhere("email = '" + this.email + "'", data);
 
         if (!updated) {
             JOptionPane.showMessageDialog(null, "update anggota gagal");

@@ -652,7 +652,7 @@
         <Component class="javax.swing.JComboBox" name="cbDivisi">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Web&quot;, &quot;Android&quot;, &quot;Game&quot;, &quot;UI/UX&quot;, &quot;Startup Competion&quot;})" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Web&quot;, &quot;Android&quot;, &quot;Game&quot;, &quot;UI/UX&quot;, &quot;Startup and Competion&quot;})" type="code"/>
             </Property>
           </Properties>
           <AuxValues>

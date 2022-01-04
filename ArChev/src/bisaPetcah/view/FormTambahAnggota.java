@@ -10,6 +10,7 @@ import bisaPetcah.model.divisi.DivisiService;
 import bisaPetcah.model.member.Member;
 import bisaPetcah.model.member.MemberService;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
     MemberService memberService = new MemberService();
     DivisiService divisiService = new DivisiService();
+    DefaultComboBoxModel<String> comboModel;
 
     /**
      * Creates new form Dashboard
@@ -28,10 +30,23 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         initUsername();
+        initDivisi();
     }
     
     public void initUsername() {
         tvUsername.setText(Auth.getNama());
+    }
+    
+    public void initDivisi() {
+        comboModel = new DefaultComboBoxModel<>();
+        ArrayList<bisaPetcah.model.divisi.Divisi> dataDivisi = divisiService.all();
+        
+        for (bisaPetcah.model.divisi.Divisi data : dataDivisi) {
+            comboModel.addElement(String.valueOf(data.getNama()));
+        }
+
+        cbDivisi.setModel(comboModel);
+        cbDivisi.setSelectedIndex(0);
     }
 
     public void reset() {
@@ -425,7 +440,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
         cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aktif", "Pasif" }));
 
-        cbDivisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Web", "Android", "Game", "UI/UX", "Startup Competion"}));
+        cbDivisi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Web", "Android", "Game", "UI/UX", "Startup and Competion"}));
 
         tvName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tvName.setText("Nama Lengkap");

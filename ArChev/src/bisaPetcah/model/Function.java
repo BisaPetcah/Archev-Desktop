@@ -15,7 +15,7 @@ public class Function {
     public static String security(String password){
         try{
             StringBuilder builderHash = new StringBuilder();
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA256");
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
             byte[] resultByteArray = messageDigest.digest();
             for (byte b : resultByteArray){
