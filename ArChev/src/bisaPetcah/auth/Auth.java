@@ -4,6 +4,7 @@
  */
 package bisaPetcah.auth;
 
+import bisaPetcah.model.Function;
 import bisaPetcah.model.admin.Admin;
 import bisaPetcah.model.admin.AdminService;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class Auth {
     }
     
     public static boolean login(String username, String password) {
+        password = Function.security(password);
         ArrayList<Admin> admin = dataAdmin.where("username = '" + username + "'");
         if (admin.size() != 1) {
             return false;
