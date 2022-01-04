@@ -23,19 +23,21 @@ public class ConnectionService {
 
     public static Connection open() {
         try {
-            Class.forName(ConfigDatabase.getDriver());
             if (connection == null) {
                 connection = DriverManager.getConnection(
                         ConfigDatabase.getDbUrl(),
                         ConfigDatabase.getDbUser(),
                         ConfigDatabase.getDbPassword()
                 );
+                if (connection == null) {
+                    throw new Exception("Connection Failure");
+                }
             }
             statement = connection.createStatement();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConnectionService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return connection;
