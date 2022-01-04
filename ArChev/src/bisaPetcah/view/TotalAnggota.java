@@ -38,7 +38,7 @@ public class TotalAnggota extends javax.swing.JFrame {
 
     public void initTable() {
         String[] header = {
-            "Nomor", "Nama", "Email", "Divisi", "Angkatan", "Status", "id"
+            "Nomor", "Nama", "Email", "Divisi", "Angkatan", "Status"
         };
 
         tableModel = new DefaultTableModel(header, 0);
