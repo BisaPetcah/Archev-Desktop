@@ -5,8 +5,14 @@
 package bisaPetcah.model;
 
 import bisaPetcah.database.ConnectionService;
+import bisaPetcah.model.divisi.Divisi;
+import bisaPetcah.model.divisi.DivisiService;
 import bisaPetcah.model.member.Member;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,5 +58,38 @@ public abstract class Service<T> {
         }
         return false;
     }
+    
+    public int countAll() {
+        try {
+            String query = "SELECT COUNT(id) total FROM %s";
+            query = String.format(query, this.table);
+            ResultSet result = ConnectionService.get(query);
 
+            while (result.next()) {
+                return result.getInt("total");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            ConnectionService.close();
+        }
+        return 0;
+    }
+    
+    public int countWhere(String where) {
+        try {
+            String query = "SELECT COUNT(id) total FROM %s WHERE %s";
+            query = String.format(query, this.table, where);
+            ResultSet result = ConnectionService.get(query);
+
+            while (result.next()) {
+                return result.getInt("total");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            ConnectionService.close();
+        }
+        return 0;
+    }
 }

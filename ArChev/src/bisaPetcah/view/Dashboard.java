@@ -6,11 +6,16 @@ package bisaPetcah.view;
 
 import bisaPetcah.auth.Auth;
 import bisaPetcah.model.Design;
+import bisaPetcah.model.divisi.DivisiService;
+import bisaPetcah.model.member.MemberService;
 
 /**
  * @author bisa_petcah
  */
 public class Dashboard extends javax.swing.JFrame {
+    MemberService memberService = new MemberService();
+    DivisiService divisiService = new DivisiService();
+            
 
     /**
      * Creates new form Dashboard
@@ -20,10 +25,18 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         initUsername();
+        initData();
     }
     
     public void initUsername() {
         tvUsername.setText(Auth.getNama());
+    }
+
+    public void initData() {
+        tvTotalAnggota.setText(String.valueOf(memberService.countAll()));
+        tvAnggotaAktif.setText(String.valueOf(memberService.countWhere("status = 'Aktif'")));
+        tvAnggotaPasif.setText(String.valueOf(memberService.countWhere("status = 'Pasif'")));
+        tvDivisi.setText(String.valueOf(divisiService.countAll()));
     }
 
     /**
@@ -59,19 +72,23 @@ public class Dashboard extends javax.swing.JFrame {
         icon = new javax.swing.JLabel();
         countJumlahTotalAnggota = new javax.swing.JLabel();
         Label = new javax.swing.JLabel();
+        tvTotalAnggota = new javax.swing.JLabel();
         tvStatus = new javax.swing.JLabel();
         panelAnggotaAktif = new javax.swing.JPanel();
         icon1 = new javax.swing.JLabel();
         countJumlahAnggotaAktif = new javax.swing.JLabel();
         Label1 = new javax.swing.JLabel();
+        tvAnggotaAktif = new javax.swing.JLabel();
         panelAnggotaPasif = new javax.swing.JPanel();
         icon2 = new javax.swing.JLabel();
         countJumlahAnggotaPasif = new javax.swing.JLabel();
         Label2 = new javax.swing.JLabel();
+        tvAnggotaPasif = new javax.swing.JLabel();
         panelDivisi = new javax.swing.JPanel();
         icon3 = new javax.swing.JLabel();
         countJumlahDivisi = new javax.swing.JLabel();
         Label3 = new javax.swing.JLabel();
+        tvDivisi = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ArChev");
@@ -400,6 +417,12 @@ public class Dashboard extends javax.swing.JFrame {
         Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label.setText("Total Anggota");
 
+        tvTotalAnggota.setBackground(new java.awt.Color(255, 255, 255));
+        tvTotalAnggota.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tvTotalAnggota.setForeground(new java.awt.Color(255, 255, 255));
+        tvTotalAnggota.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tvTotalAnggota.setText("14");
+
         javax.swing.GroupLayout panelTotalAnggotaLayout = new javax.swing.GroupLayout(panelTotalAnggota);
         panelTotalAnggota.setLayout(panelTotalAnggotaLayout);
         panelTotalAnggotaLayout.setHorizontalGroup(
@@ -415,7 +438,8 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(Label, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelTotalAnggotaLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tvTotalAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         panelTotalAnggotaLayout.setVerticalGroup(
@@ -427,7 +451,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(countJumlahTotalAnggota)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Label)
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tvTotalAnggota)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         tvStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bisaPetcah/images/tab/dashboard.png"))); // NOI18N
@@ -455,6 +481,11 @@ public class Dashboard extends javax.swing.JFrame {
         Label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label1.setText("Anggota Aktif");
 
+        tvAnggotaAktif.setBackground(new java.awt.Color(255, 255, 255));
+        tvAnggotaAktif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tvAnggotaAktif.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tvAnggotaAktif.setText("14");
+
         javax.swing.GroupLayout panelAnggotaAktifLayout = new javax.swing.GroupLayout(panelAnggotaAktif);
         panelAnggotaAktif.setLayout(panelAnggotaAktifLayout);
         panelAnggotaAktifLayout.setHorizontalGroup(
@@ -462,14 +493,16 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(panelAnggotaAktifLayout.createSequentialGroup()
                 .addGroup(panelAnggotaAktifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAnggotaAktifLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelAnggotaAktifLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(countJumlahAnggotaAktif))
                     .addGroup(panelAnggotaAktifLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAnggotaAktifLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(panelAnggotaAktifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tvAnggotaAktif, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         panelAnggotaAktifLayout.setVerticalGroup(
@@ -481,7 +514,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(countJumlahAnggotaAktif)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Label1)
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tvAnggotaAktif)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         panelAnggotaPasif.setBackground(new java.awt.Color(255, 255, 255));
@@ -507,6 +542,11 @@ public class Dashboard extends javax.swing.JFrame {
         Label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label2.setText("Anggota Pasif");
 
+        tvAnggotaPasif.setBackground(new java.awt.Color(255, 255, 255));
+        tvAnggotaPasif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tvAnggotaPasif.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tvAnggotaPasif.setText("14");
+
         javax.swing.GroupLayout panelAnggotaPasifLayout = new javax.swing.GroupLayout(panelAnggotaPasif);
         panelAnggotaPasif.setLayout(panelAnggotaPasifLayout);
         panelAnggotaPasifLayout.setHorizontalGroup(
@@ -514,14 +554,16 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(panelAnggotaPasifLayout.createSequentialGroup()
                 .addGroup(panelAnggotaPasifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAnggotaPasifLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(Label2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelAnggotaPasifLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(countJumlahAnggotaPasif))
                     .addGroup(panelAnggotaPasifLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(icon2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(icon2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAnggotaPasifLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(panelAnggotaPasifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tvAnggotaPasif, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         panelAnggotaPasifLayout.setVerticalGroup(
@@ -532,7 +574,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(countJumlahAnggotaPasif)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Label2)
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tvAnggotaPasif)
+                .addGap(0, 33, Short.MAX_VALUE))
         );
 
         panelDivisi.setBackground(new java.awt.Color(255, 255, 255));
@@ -559,6 +603,11 @@ public class Dashboard extends javax.swing.JFrame {
         Label3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label3.setText("Divisi");
 
+        tvDivisi.setBackground(new java.awt.Color(255, 255, 255));
+        tvDivisi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tvDivisi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tvDivisi.setText("14");
+
         javax.swing.GroupLayout panelDivisiLayout = new javax.swing.GroupLayout(panelDivisi);
         panelDivisi.setLayout(panelDivisiLayout);
         panelDivisiLayout.setHorizontalGroup(
@@ -570,11 +619,13 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(panelDivisiLayout.createSequentialGroup()
                 .addGroup(panelDivisiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDivisiLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(Label3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelDivisiLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addComponent(countJumlahDivisi)))
+                        .addComponent(countJumlahDivisi))
+                    .addGroup(panelDivisiLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(panelDivisiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tvDivisi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelDivisiLayout.setVerticalGroup(
@@ -586,7 +637,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(countJumlahDivisi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Label3)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tvDivisi)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
@@ -813,8 +866,12 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel panelLog;
     private javax.swing.JPanel panelSideBarMenu;
     private javax.swing.JPanel panelTotalAnggota;
+    private javax.swing.JLabel tvAnggotaAktif;
+    private javax.swing.JLabel tvAnggotaPasif;
+    private javax.swing.JLabel tvDivisi;
     private javax.swing.JLabel tvRole;
     private javax.swing.JLabel tvStatus;
+    private javax.swing.JLabel tvTotalAnggota;
     private javax.swing.JLabel tvUsername;
     private javax.swing.JLabel txtAnggotaAktif;
     private javax.swing.JLabel txtAnggotaPasif;

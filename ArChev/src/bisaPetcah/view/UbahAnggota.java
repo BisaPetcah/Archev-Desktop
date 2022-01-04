@@ -616,7 +616,7 @@ public class UbahAnggota extends javax.swing.JFrame {
         }
         
         ArrayList<Member> admin = memberService.where("email = '" + edtEmail.getText() + "'");
-        if (admin.size() != 0 && this.email != edtEmail.getText()) {
+        if (admin.size() > 0 && this.email == edtEmail.getText()) {
             JOptionPane.showMessageDialog(null, "email sudah ada");
             return;
         }
