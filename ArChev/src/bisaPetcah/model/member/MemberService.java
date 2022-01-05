@@ -39,6 +39,22 @@ public class MemberService extends Service<Member> {
         }
         return this.listData;
     }
+    
+    public ArrayList<Member> order(String order) {
+        this.listData = new ArrayList<Member>();
+        try {
+            ResultSet result = ConnectionService.get("SELECT m.id, m.nama, m.tahun_angkatan, m.email, d.nama divisi, m.status FROM " + this.table + " m INNER JOIN archev_desktop.divisi d ON d.id = m.divisi_id ORDER BY " + order);
+
+            while (result.next()) {
+                this.listData.add(new Member(result.getInt("id"), result.getString("nama"), result.getString("tahun_angkatan"), result.getString("email"), result.getString("status"), result.getString("divisi")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MemberService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionService.close();
+        }
+        return this.listData;
+    }
 
     @Override
     public ArrayList<Member> where(String where) {

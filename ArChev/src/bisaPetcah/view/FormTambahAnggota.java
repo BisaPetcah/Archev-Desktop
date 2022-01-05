@@ -109,6 +109,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         edtTahunAngkatan = new javax.swing.JTextField();
         tvName2 = new javax.swing.JLabel();
         btnTambah = new javax.swing.JButton();
+        btnKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ArChev");
@@ -464,6 +465,16 @@ public class FormTambahAnggota extends javax.swing.JFrame {
             }
         });
 
+        btnKembali.setBackground(new java.awt.Color(255, 164, 0));
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnKembali.setForeground(new java.awt.Color(255, 255, 255));
+        btnKembali.setText("Kembali");
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKembaliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DashboardLayout = new javax.swing.GroupLayout(Dashboard);
         Dashboard.setLayout(DashboardLayout);
         DashboardLayout.setHorizontalGroup(
@@ -473,6 +484,8 @@ public class FormTambahAnggota extends javax.swing.JFrame {
                 .addComponent(panelSideBarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DashboardLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnKembali)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tvUsername)
@@ -511,14 +524,16 @@ public class FormTambahAnggota extends javax.swing.JFrame {
                                             .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(cbDivisi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addContainerGap(208, Short.MAX_VALUE))))
+                        .addContainerGap(201, Short.MAX_VALUE))))
         );
         DashboardLayout.setVerticalGroup(
             DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelSideBarMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(DashboardLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(tvUsername)
+                .addGap(39, 39, 39)
+                .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tvUsername)
+                    .addComponent(btnKembali))
                 .addGap(1, 1, 1)
                 .addComponent(tvRole)
                 .addGap(14, 14, 14)
@@ -547,7 +562,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambah)
                     .addComponent(btnBatal))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         getContentPane().add(Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(-270, -30, 1550, 750));
@@ -557,8 +572,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         Auth.logout();
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -596,21 +610,18 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
     private void btnTotalAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTotalAnggotaMouseClicked
         // TODO add your handling code here:
-        TotalAnggota view = new TotalAnggota();
-        view.setVisible(true);
+        ManagePage.next("total_anggota");
         this.dispose();;
     }//GEN-LAST:event_btnTotalAnggotaMouseClicked
 
     private void btnAnggotaPasifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaPasifMouseClicked
         // TODO add your handling code here:
-        AnggotaPasif view = new AnggotaPasif();
-        view.setVisible(true);
+        ManagePage.next("anggota_pasif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaPasifMouseClicked
 
     private void btnDivisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiMouseClicked
-        Divisi divisi = new Divisi();
-        divisi.setVisible(true);
+        ManagePage.next("divisi");
         this.dispose();
     }//GEN-LAST:event_btnDivisiMouseClicked
 
@@ -648,8 +659,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
     private void btnAnggotaAktifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseClicked
         // TODO add your handling code here:
-        AnggotaAktif anggotaAktif = new AnggotaAktif();
-        anggotaAktif.setVisible(true);
+        ManagePage.next("anggota_aktif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaAktifMouseClicked
 
@@ -665,8 +675,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
 
     private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
         // TODO add your handling code here:
-        Dashboard dashboard = new Dashboard();
-        dashboard.setVisible(true);
+        ManagePage.next("dashboard");
         this.dispose();
     }//GEN-LAST:event_btnDashboardMouseClicked
 
@@ -679,6 +688,12 @@ public class FormTambahAnggota extends javax.swing.JFrame {
         // TODO add your handling code here:
         Design.btnInActive(btnDashboard);
     }//GEN-LAST:event_btnDashboardMouseExited
+
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        // TODO add your handling code here:
+        ManagePage.back();
+        this.dispose();
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -753,6 +768,7 @@ public class FormTambahAnggota extends javax.swing.JFrame {
     private javax.swing.JButton btnBatal;
     private javax.swing.JPanel btnDashboard;
     private javax.swing.JPanel btnDivisi;
+    private javax.swing.JButton btnKembali;
     private javax.swing.JPanel btnLogout;
     private javax.swing.JButton btnTambah;
     private javax.swing.JPanel btnTotalAnggota;

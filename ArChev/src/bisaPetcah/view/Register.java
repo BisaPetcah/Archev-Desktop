@@ -218,8 +218,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDaftarMouseExited
 
     private void btnMasukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasukMouseClicked
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnMasukMouseClicked
 
@@ -246,8 +245,7 @@ public class Register extends javax.swing.JFrame {
 
         Auth.login(data.getUsername(), data.getPassword());
         if (Auth.isAuth()) {
-            Dashboard dashboard = new Dashboard();
-            dashboard.setVisible(true);
+            ManagePage.next("dashboard");
             this.dispose();
         }
     }//GEN-LAST:event_btnDaftarMouseClicked

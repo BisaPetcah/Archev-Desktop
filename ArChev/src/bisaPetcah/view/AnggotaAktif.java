@@ -47,7 +47,7 @@ public class AnggotaAktif extends javax.swing.JFrame {
 
     public void tampilAll() {
         int i = 1;
-        ArrayList<Member> dataAnggota = memberService.where("m.status = 'Aktif'");
+        ArrayList<Member> dataAnggota = memberService.where("m.status = 'Aktif' ORDER BY m.divisi_id");
         for (Member data : dataAnggota) {
             addDataToTable(i++, data);
         }
@@ -517,8 +517,7 @@ public class AnggotaAktif extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         Auth.logout();
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -555,26 +554,22 @@ public class AnggotaAktif extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDivisiMouseExited
 
     private void btnTotalAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTotalAnggotaMouseClicked
-        TotalAnggota view = new TotalAnggota();
-        view.setVisible(true);
+        ManagePage.next("total_anggota");
         this.dispose();
     }//GEN-LAST:event_btnTotalAnggotaMouseClicked
 
     private void btnAnggotaPasifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaPasifMouseClicked
-        AnggotaPasif view = new AnggotaPasif();
-        view.setVisible(true);
+        ManagePage.next("anggota_pasif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaPasifMouseClicked
 
     private void btnDivisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiMouseClicked
-        Divisi divisi = new Divisi();
-        divisi.setVisible(true);
+        ManagePage.next("divisi");
         this.dispose();
     }//GEN-LAST:event_btnDivisiMouseClicked
 
     private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
-        Dashboard view = new Dashboard();
-        view.setVisible(true);
+        ManagePage.next("dashboard");
         this.dispose();
     }//GEN-LAST:event_btnDashboardMouseClicked
 
@@ -603,7 +598,7 @@ public class AnggotaAktif extends javax.swing.JFrame {
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
         int i = table.getSelectedRow();
-
+        
         if (i >= 0) {
             int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin mengahapus data tersebut");
             if (confirm == 0) {
@@ -624,8 +619,7 @@ public class AnggotaAktif extends javax.swing.JFrame {
         int i = table.getSelectedRow();
 
         if (i >= 0) {
-            UbahAnggota ubahAnggota = new UbahAnggota(String.valueOf(tableModel.getValueAt(i, 2)));
-            ubahAnggota.setVisible(true);
+            ManagePage.next("ubah_anggota", String.valueOf(tableModel.getValueAt(i, 2)));
             this.dispose();
         }
     }//GEN-LAST:event_btnEditActionPerformed

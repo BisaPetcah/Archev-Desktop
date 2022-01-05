@@ -708,8 +708,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         Auth.logout();
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -722,8 +721,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDivisiMouseEntered
 
     private void btnDivisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiMouseClicked
-        Divisi divisi = new Divisi();
-        divisi.setVisible(true);
+        ManagePage.next("divisi");
         this.dispose();
     }//GEN-LAST:event_btnDivisiMouseClicked
 
@@ -736,8 +734,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnggotaPasifMouseEntered
 
     private void btnAnggotaPasifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaPasifMouseClicked
-        AnggotaPasif anggotaPasif = new AnggotaPasif();
-        anggotaPasif.setVisible(true);
+        ManagePage.next("anggota_pasif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaPasifMouseClicked
 
@@ -750,8 +747,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnggotaAktifMouseEntered
 
     private void btnAnggotaAktifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseClicked
-        AnggotaAktif anggotaAktif = new AnggotaAktif();
-        anggotaAktif.setVisible(true);
+        ManagePage.next("anggota_aktif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaAktifMouseClicked
 
@@ -764,8 +760,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTotalAnggotaMouseEntered
 
     private void btnTotalAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTotalAnggotaMouseClicked
-        TotalAnggota totalAnggota = new TotalAnggota();
-        totalAnggota.setVisible(true);
+        ManagePage.next("total_anggota");
         this.dispose();
     }//GEN-LAST:event_btnTotalAnggotaMouseClicked
 

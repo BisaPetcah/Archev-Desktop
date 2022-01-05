@@ -48,7 +48,7 @@ public class TotalAnggota extends javax.swing.JFrame {
 
     public void tampilAll() {
         int i = 1;
-        ArrayList<Member> dataAnggota = memberService.all();
+        ArrayList<Member> dataAnggota = memberService.order("divisi_id");
         for (Member data : dataAnggota) {
             addDataToTable(i++, data);
         }
@@ -506,8 +506,7 @@ public class TotalAnggota extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         Auth.logout();
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -544,26 +543,22 @@ public class TotalAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDivisiMouseExited
 
     private void btnAnggotaAktifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseClicked
-        AnggotaAktif anggotaAktif = new AnggotaAktif();
-        anggotaAktif.setVisible(true);
+        ManagePage.next("anggota_aktif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaAktifMouseClicked
 
     private void btnAnggotaPasifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaPasifMouseClicked
-        AnggotaPasif anggotaPasif = new AnggotaPasif();
-        anggotaPasif.setVisible(true);
+        ManagePage.next("anggota_pasif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaPasifMouseClicked
 
     private void btnDivisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiMouseClicked
-        Divisi divisi = new Divisi();
-        divisi.setVisible(true);
+        ManagePage.next("divisi");
         this.dispose();
     }//GEN-LAST:event_btnDivisiMouseClicked
 
     private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
-        Dashboard dashboard = new Dashboard();
-        dashboard.setVisible(true);
+        ManagePage.next("dashboard");
         this.dispose();
     }//GEN-LAST:event_btnDashboardMouseClicked
 
@@ -576,8 +571,7 @@ public class TotalAnggota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDashboardMouseEntered
 
     private void btnTambahAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahAnggotaActionPerformed
-        FormTambahAnggota view = new FormTambahAnggota();
-        view.setVisible(true);
+        ManagePage.next("tambah_anggota");
         this.dispose();
     }//GEN-LAST:event_btnTambahAnggotaActionPerformed
 

@@ -48,7 +48,7 @@ public class AnggotaPasif extends javax.swing.JFrame {
 
     public void tampilAll() {
         int i = 1;
-        ArrayList<Member> dataAnggota = memberService.where("m.status = 'Pasif'");
+        ArrayList<Member> dataAnggota = memberService.where("m.status = 'Pasif' ORDER BY divisi_id");
         for (Member data : dataAnggota) {
             addDataToTable(i++, data);
         }
@@ -465,9 +465,10 @@ public class AnggotaPasif extends javax.swing.JFrame {
             .addGroup(DashboardLayout.createSequentialGroup()
                 .addGap(270, 270, 270)
                 .addComponent(panelSideBarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DashboardLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addGap(216, 216, 216)
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -475,7 +476,6 @@ public class AnggotaPasif extends javax.swing.JFrame {
                             .addComponent(tvRole, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(64, 64, 64))
                     .addGroup(DashboardLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DashboardLayout.createSequentialGroup()
                                 .addComponent(edtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -501,7 +501,7 @@ public class AnggotaPasif extends javax.swing.JFrame {
                     .addGroup(DashboardLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCari)
                     .addComponent(edtCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -519,8 +519,7 @@ public class AnggotaPasif extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         Auth.logout();
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -557,20 +556,17 @@ public class AnggotaPasif extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDivisiMouseExited
 
     private void btnTotalAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTotalAnggotaMouseClicked
-        TotalAnggota view = new TotalAnggota();
-        view.setVisible(true);
+        ManagePage.next("total_anggota");
         this.dispose();
     }//GEN-LAST:event_btnTotalAnggotaMouseClicked
 
     private void btnAnggotaAktifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseClicked
-        AnggotaAktif view = new AnggotaAktif();
-        view.setVisible(true);
+        ManagePage.next("anggota_aktif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaAktifMouseClicked
 
     private void btnDivisiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiMouseClicked
-        Divisi divisi = new Divisi();
-        divisi.setVisible(true);
+        ManagePage.next("divisi");
         this.dispose();
     }//GEN-LAST:event_btnDivisiMouseClicked
 
@@ -583,8 +579,7 @@ public class AnggotaPasif extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDashboardMouseExited
 
     private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
-        Dashboard view = new Dashboard();
-        view.setVisible(true);
+        ManagePage.next("dashboard");
         this.dispose();
     }//GEN-LAST:event_btnDashboardMouseClicked
 
@@ -626,8 +621,7 @@ public class AnggotaPasif extends javax.swing.JFrame {
         int i = table.getSelectedRow();
 
         if (i >= 0) {
-            UbahAnggota ubahAnggota = new UbahAnggota(String.valueOf(tableModel.getValueAt(i, 2)));
-            ubahAnggota.setVisible(true);
+            ManagePage.next("ubah_anggota", String.valueOf(tableModel.getValueAt(i, 2)));
             this.dispose();
         }
     }//GEN-LAST:event_btnEditActionPerformed

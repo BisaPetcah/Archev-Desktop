@@ -213,8 +213,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLupaKataSandiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLupaKataSandiMouseClicked
-        ResetPassword resetPassword = new ResetPassword();
-        resetPassword.setVisible(true);
+        ManagePage.next("reset_password");
         this.dispose();
     }//GEN-LAST:event_btnLupaKataSandiMouseClicked
 
@@ -227,8 +226,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMasukMouseExited
 
     private void btnDaftarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDaftarMouseClicked
-        Register register = new Register();
-        register.setVisible(true);
+        ManagePage.next("register");
         this.dispose();
     }//GEN-LAST:event_btnDaftarMouseClicked
 
@@ -256,8 +254,7 @@ public class Login extends javax.swing.JFrame {
             return;
         }
 //        if (nama.equalsIgnoreCase("admin") && pass.equalsIgnoreCase("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918")){
-        Dashboard dashboard = new Dashboard();
-        dashboard.setVisible(true);
+        ManagePage.next("dashboard");
         this.dispose();
 //        } else if(nama.equals("") && pass.equals("")){
 //            JOptionPane.showMessageDialog(null, "Ada bagian yang belum diisi", "Error", JOptionPane.ERROR_MESSAGE);

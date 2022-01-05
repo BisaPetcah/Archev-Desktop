@@ -211,8 +211,7 @@ public class ResetPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetMouseEntered
 
     private void btnMasukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasukMouseClicked
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnMasukMouseClicked
 
@@ -242,8 +241,7 @@ public class ResetPassword extends javax.swing.JFrame {
             return;
         }
 
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnResetMouseClicked
 

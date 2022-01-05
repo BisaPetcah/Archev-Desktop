@@ -620,8 +620,7 @@ public class Divisi extends javax.swing.JFrame {
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         Auth.logout();
-        Login login = new Login();
-        login.setVisible(true);
+        ManagePage.next("login");
         this.dispose();
     }//GEN-LAST:event_btnLogoutMouseClicked
 
@@ -698,38 +697,32 @@ public class Divisi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDivisiStartupMouseExited
 
     private void btnDivisiWebMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiWebMouseClicked
-        AnggotaDivisiWeb view = new AnggotaDivisiWeb();
-        view.setVisible(true);
+        ManagePage.next("divisi_web");
         this.dispose();
     }//GEN-LAST:event_btnDivisiWebMouseClicked
 
     private void btnDivisiAndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiAndroidMouseClicked
-        AnggotaDivisiAndroid view = new AnggotaDivisiAndroid();
-        view.setVisible(true);
+        ManagePage.next("divisi_android");
         this.dispose();
     }//GEN-LAST:event_btnDivisiAndroidMouseClicked
 
     private void btnDivisiStartupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiStartupMouseClicked
-        AnggotaDivisiStartup view = new AnggotaDivisiStartup();
-        view.setVisible(true);
+        ManagePage.next("divisi_startup");
         this.dispose();
     }//GEN-LAST:event_btnDivisiStartupMouseClicked
 
     private void btnDivisiGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiGameMouseClicked
-        AnggotaDivisiGame view = new AnggotaDivisiGame();
-        view.setVisible(true);
+        ManagePage.next("divisi_game");
         this.dispose();
     }//GEN-LAST:event_btnDivisiGameMouseClicked
 
     private void btnDivisiUIUXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDivisiUIUXMouseClicked
-        AnggotaDivisiUIUX view = new AnggotaDivisiUIUX();
-        view.setVisible(true);
+        ManagePage.next("divisi_uiux");
         this.dispose();
     }//GEN-LAST:event_btnDivisiUIUXMouseClicked
 
     private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
-        Dashboard view = new Dashboard();
-        view.setVisible(true);
+        ManagePage.next("dashboard");
         this.dispose();
     }//GEN-LAST:event_btnDashboardMouseClicked
 
@@ -742,20 +735,17 @@ public class Divisi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDashboardMouseExited
 
     private void btnAnggotaAktifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaAktifMouseClicked
-        AnggotaAktif view = new AnggotaAktif();
-        view.setVisible(true);
+        ManagePage.next("anggota_aktif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaAktifMouseClicked
 
     private void btnAnggotaPasifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnggotaPasifMouseClicked
-        AnggotaPasif view = new AnggotaPasif();
-        view.setVisible(true);
+        ManagePage.next("anggota_pasif");
         this.dispose();
     }//GEN-LAST:event_btnAnggotaPasifMouseClicked
 
     private void btnTotalAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTotalAnggotaMouseClicked
-        TotalAnggota view = new TotalAnggota();
-        view.setVisible(true);
+        ManagePage.next("total_anggota");
         this.dispose();
     }//GEN-LAST:event_btnTotalAnggotaMouseClicked
 
