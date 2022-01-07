@@ -5,6 +5,7 @@ package bisaPetcah.view;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 import bisaPetcah.auth.Auth;
+import bisaPetcah.database.ConnectionService;
 import bisaPetcah.model.Design;
 import bisaPetcah.model.Function;
 import javax.swing.JOptionPane;
@@ -21,6 +22,14 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        checkConnection();
+    }
+    
+    public void checkConnection () {
+        if (ConnectionService.open() == null) {
+            JOptionPane.showMessageDialog(this, "Database tidak terhubung, pastikan database sesuai dengan file .env!");
+            System.exit(0);
+        }
     }
 
     /**
